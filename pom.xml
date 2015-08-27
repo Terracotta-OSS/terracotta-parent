@@ -198,7 +198,7 @@
   </pluginRepositories>
 
   <scm>
-    <connection>scm:git:ssh://git@github.com:chrisdennis/terracotta-parent.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:chrisdennis/terracotta-parent.git</developerConnection>
+    <connection>scm:git:https://github.com/Terracotta-OSS/terracotta-parent.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:Terracotta-OSS/terracotta-parent.git</developerConnection>
   </scm>
 </project>
