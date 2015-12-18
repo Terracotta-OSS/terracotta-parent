@@ -12,6 +12,7 @@
   <description>Parent POM for Terracotta modules</description>
   
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.build.version>1.8</java.build.version>
   </properties>
   
