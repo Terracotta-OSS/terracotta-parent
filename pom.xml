@@ -163,7 +163,7 @@
           <toolchains>
             <jdk>
               <version>${java.build.version}</version>
-              <vendor>${java.build.version}</vendor>
+              <vendor>${java.build.vendor}</vendor>
             </jdk>
           </toolchains>
         </configuration>
