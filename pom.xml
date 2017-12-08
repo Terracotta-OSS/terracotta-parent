@@ -5,7 +5,7 @@
   
   <groupId>org.terracotta</groupId>
   <artifactId>terracotta-parent</artifactId>
-  <version>5.0-SNAPSHOT</version>
+  <version>5.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Terracotta Parent</name>
@@ -14,6 +14,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.build.version>1.8</java.build.version>
+    <java.build.vendor>Oracle Corporation</java.build.vendor>
   </properties>
   
   <distributionManagement>
@@ -162,6 +163,7 @@
           <toolchains>
             <jdk>
               <version>${java.build.version}</version>
+              <vendor>${java.build.version}</vendor>
             </jdk>
           </toolchains>
         </configuration>
