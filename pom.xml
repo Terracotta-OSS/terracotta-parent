@@ -5,7 +5,7 @@
   
   <groupId>org.terracotta</groupId>
   <artifactId>terracotta-parent</artifactId>
-  <version>5.4-SNAPSHOT</version>
+  <version>5.5-SNAPSHOT</version>
   <packaging>pom</packaging>
   
   <name>Terracotta Parent</name>
@@ -50,12 +50,12 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>1.4</version>
+          <version>3.0.0-M2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
+          <version>3.1.0</version>
           <configuration>
             <archive>
               <manifestEntries>
@@ -73,7 +73,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
-          <version>2.4</version>
+          <version>3.0.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
