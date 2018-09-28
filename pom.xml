@@ -14,7 +14,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.build.version>1.8</java.build.version>
-    <java.build.vendor>Oracle Corporation</java.build.vendor>
   </properties>
   
   <distributionManagement>
@@ -163,7 +162,6 @@
           <toolchains>
             <jdk>
               <version>${java.build.version}</version>
-              <vendor>${java.build.vendor}</vendor>
             </jdk>
           </toolchains>
         </configuration>
