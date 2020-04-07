@@ -57,6 +57,7 @@
             <jdk>
               <version>${java.test.version}</version>
             </jdk>
+            <trimStackTrace>false</trimStackTrace>
           </configuration>
         </plugin>
         <plugin>
