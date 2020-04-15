@@ -15,7 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.build.version>1.8</java.build.version>
     <java.test.version>${java.build.version}</java.test.version>
-    <maven-forge-plugin.version>1.2.32</maven-forge-plugin.version>
+    <maven-forge-plugin.version>1.2.33</maven-forge-plugin.version>
     <skipITs>${skipTests}</skipITs>
   </properties>
   
@@ -58,11 +58,6 @@
             <jdk>
               <version>${java.test.version}</version>
             </jdk>
-            <!--
-              failsafe only honors JAVA_HOME being set by our subclass if
-              JAVA_HOME is on the exclude list:
-            -->
-            <excludedEnvironmentVariables>JAVA_HOME</excludedEnvironmentVariables>
             <trimStackTrace>false</trimStackTrace>
           </configuration>
         </plugin>

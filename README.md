@@ -8,6 +8,9 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.12
+* New maven-forge-plugin with proper failsafe/surefire JAVA_HOME env var support (previous versions did not correctly hack this variable in failsafe)
+
 ### 5.10
 * `slow` and `fast` modes.  **slow** is default, **fast** skips everything inessential to permit quick building.
 * `-Dfast -DskipTest` is the fastest way to build a project using this parent.
