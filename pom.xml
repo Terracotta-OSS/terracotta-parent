@@ -5,7 +5,7 @@
   
   <groupId>org.terracotta</groupId>
   <artifactId>terracotta-parent</artifactId>
-  <version>5.11-SNAPSHOT</version>
+  <version>5.11</version>
   <packaging>pom</packaging>
   
   <name>Terracotta Parent</name>
