@@ -58,6 +58,11 @@
             <jdk>
               <version>${java.test.version}</version>
             </jdk>
+            <!--
+              failsafe only honors JAVA_HOME being set by our subclass if
+              JAVA_HOME is on the exclude list:
+            -->
+            <excludedEnvironmentVariables>JAVA_HOME</excludedEnvironmentVariables>
             <trimStackTrace>false</trimStackTrace>
           </configuration>
         </plugin>
