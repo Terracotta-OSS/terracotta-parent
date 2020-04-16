@@ -12,6 +12,8 @@ Easier upgrading of all plugins.
 * Moving license plugin to this parent with reasonable defaults.  
   child projects should be able to remove all mentions of this plugin unless
   defaults don't fit
+* Add spotbugs to main execution
+* Add spotbugs provided dependency for annotation
 
 ### 5.12
 * New maven-forge-plugin with proper failsafe/surefire JAVA_HOME env var support (previous versions did not correctly hack this variable in failsafe)
