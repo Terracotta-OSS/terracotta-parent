@@ -30,6 +30,7 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.build.version>1.8</java.build.version>
     <java.test.version>${java.build.version}</java.test.version>
     <maven-forge-plugin.version>1.2.33</maven-forge-plugin.version>
@@ -115,19 +116,27 @@
           <artifactId>maven-source-plugin</artifactId>
           <version>3.0.1</version>
         </plugin>
+        <!-- disable default surefire/failsafe execution since we're using maven-forge-plugin -->
+        <!-- child projects can still declare custom executions if desired -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
+          <executions>
+            <execution>
+              <id>default-test</id>
+              <phase>none</phase>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
+          <executions>
+            <execution>
+              <id>default-test</id>
+              <phase>none</phase>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
