@@ -8,6 +8,11 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.13
+* Moving license plugin to this parent with reasonable defaults.  
+  child projects should be able to remove all mentions of this plugin unless
+  defaults don't fit
+
 ### 5.12
 * New maven-forge-plugin with proper failsafe/surefire JAVA_HOME env var support (previous versions did not correctly hack this variable in failsafe)
 

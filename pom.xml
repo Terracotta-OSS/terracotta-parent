@@ -1,6 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  
+<!--
+
+    Copyright Terracotta, Inc.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>org.terracotta</groupId>
@@ -39,10 +56,14 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.3</version>
+          <version>3.8.1</version>
           <configuration>
             <source>${java.build.version}</source>
             <target>${java.build.version}</target>
+            <compilerArgs>
+              <arg>-Xlint:all</arg>
+              <arg>-Werror</arg> <!-- child projects can override this config -->
+            </compilerArgs>
           </configuration>
         </plugin>
         <plugin>
@@ -84,7 +105,20 @@
           <artifactId>maven-source-plugin</artifactId>
           <version>3.0.1</version>
         </plugin>
-
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -119,20 +153,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
+
     </plugins>
 
   </build>
@@ -140,12 +161,12 @@
   <profiles>
 
     <!--
-      slow profile contains normal execution.
+      default profile contains normal (slow) execution.
       for developer convenience, all inessential plugins can be turned off with -Dfast ...
       Doing so will skip everything in this profile, allowing for a quick but not production-grade build.
     -->
     <profile>
-      <id>slow</id>
+      <id>default</id>
       <activation>
         <property>
           <name>fast</name>
@@ -157,7 +178,6 @@
 
         <pluginManagement>
           <plugins>
-
 
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -190,6 +210,42 @@
                 <skipNexusStagingDeployMojo>${maven.deploy.skip}</skipNexusStagingDeployMojo>
               </configuration>
             </plugin>
+
+            <plugin>
+              <groupId>com.mycila</groupId>
+              <artifactId>license-maven-plugin</artifactId>
+              <version>3.0</version>
+              <configuration>
+                <keywords>
+                  <keyword>License</keyword>
+                </keywords>
+                <aggregate>true</aggregate>
+                <header>header.txt</header>
+                <mapping>
+                  <java>SLASHSTAR_STYLE</java>
+                </mapping>
+                <excludes>
+                  <exclude>**/README</exclude>
+                  <exclude>**/src/test/resources/**</exclude>
+                  <exclude>**/src/main/resources/**</exclude>
+                  <!-- if you only import management in your ide, it will generate its metadata under management/ -->
+                  <exclude>**/.idea/**</exclude>
+                  <exclude>**/nbproject/**</exclude>
+                  <exclude>**/*.adoc</exclude>
+                  <exclude>**/pom.xml</exclude>
+                  <exclude>**/*.txt</exclude>
+                  <exclude>.mvn/**</exclude>
+                  <exclude>mvnw</exclude>
+                  <exclude>mvnw.cmd</exclude>
+                  <exclude>Jenkinsfile*</exclude>
+                  <exclude>azure-pipelines.yml</exclude>
+                  <exclude>LICENSE</exclude>
+                  <exclude>.git*</exclude>
+                  <exclude>.git/**</exclude>
+                </excludes>
+              </configuration>
+            </plugin>
+
           </plugins>
         </pluginManagement>
 
@@ -260,6 +316,19 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>license</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>
