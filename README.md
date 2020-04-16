@@ -10,6 +10,8 @@ Easier upgrading of all plugins.
 ### 5.14
 * Add default encoding property
 * Remove default executions of failsafe/surefire so they don't appear in the output
+* Child projects can now use surefire/failsafe if maven-forge is undesirable, but need to define
+  custom executions to do it.
 
 ### 5.13
 * Moving license plugin to this parent with reasonable defaults.  
