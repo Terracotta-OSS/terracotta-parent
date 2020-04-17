@@ -34,6 +34,8 @@
     <java.build.version>1.8</java.build.version>
     <java.test.version>${java.build.version}</java.test.version>
     <maven-forge-plugin.version>1.2.33</maven-forge-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>3.0.0-M4</maven-failsafe-plugin.version>
     <skipITs>${skipTests}</skipITs>
   </properties>
   
@@ -121,6 +123,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
           <executions>
             <execution>
               <id>default-test</id>
@@ -131,6 +134,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${maven-failsafe-plugin.version}</version>
           <executions>
             <execution>
               <id>default-test</id>

@@ -7,6 +7,10 @@ Code reuse (build logic reuse) between child projects.
 Easier upgrading of all plugins.  
 
 ## Changelog
+
+### 5.15 
+* Fix surefire/failsafe versions
+
 ### 5.14
 * Add default encoding property
 * Remove default executions of failsafe/surefire so they don't appear in the output
