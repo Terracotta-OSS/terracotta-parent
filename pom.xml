@@ -73,8 +73,7 @@
           <configuration>
             <source>${java.build.version}</source>
             <target>${java.build.version}</target>
-            <showWarnings>true</showWarnings>
-            <showDeprecation>true</showDeprecation>
+            <showWarnings>true</showWarnings>>
             <compilerArgs>
               <arg>-Xlint:all</arg>
               <arg>-Werror</arg> <!-- child projects can override this config -->
