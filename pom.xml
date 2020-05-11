@@ -73,10 +73,15 @@
           <configuration>
             <source>${java.build.version}</source>
             <target>${java.build.version}</target>
-            <showWarnings>true</showWarnings>>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+            <failOnWarning>true</failOnWarning>
             <compilerArgs>
               <arg>-Xlint:all</arg>
-              <arg>-Werror</arg> <!-- child projects can override this config -->
+              <!-- -path is required because of the class-path manifest entries generated (jars won't be found) -->
+              <arg>-Xlint:-path</arg>
+              <!-- -Werror is already set through previous Maven properties -->
+              <!--<arg>-Werror</arg>-->
             </compilerArgs>
           </configuration>
         </plugin>
