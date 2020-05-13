@@ -8,6 +8,9 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.16
+* Support vendor in toolchains (blank default)
+
 ### 5.15 
 * Fix surefire/failsafe versions
 

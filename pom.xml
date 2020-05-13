@@ -32,7 +32,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.build.version>1.8</java.build.version>
+    <!-- blank default relies on a <vendor></vendor> blank entry in toolchains.xml -->
+    <java.build.vendor></java.build.vendor>
     <java.test.version>${java.build.version}</java.test.version>
+    <!-- blank default relies on a <vendor></vendor> blank entry in toolchains.xml -->
+    <java.test.vendor></java.test.vendor>
     <maven-forge-plugin.version>1.2.33</maven-forge-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>3.0.0-M4</maven-failsafe-plugin.version>
@@ -91,6 +95,7 @@
           <configuration>
             <jdk>
               <version>${java.test.version}</version>
+              <vendor>${java.test.vendor}</vendor>
             </jdk>
             <trimStackTrace>false</trimStackTrace>
           </configuration>
@@ -367,6 +372,7 @@ limitations under the License.
               <toolchains>
                 <jdk>
                   <version>${java.build.version}</version>
+                  <vendor>${java.build.vendor}</vendor>
                 </jdk>
               </toolchains>
             </configuration>
