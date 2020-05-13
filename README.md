@@ -8,6 +8,9 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.17
+* Support vendor in toolchains (zulu default)
+
 ### 5.16
 * Support vendor in toolchains (blank default)
 
