@@ -8,6 +8,10 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.17
+* Complete repository/snapshot spec
+* -DnexusUrl=X is required for deployment
+
 ### 5.16
 * Support vendor in toolchains (zulu default)
 
