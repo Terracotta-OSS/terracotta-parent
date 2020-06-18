@@ -8,6 +8,11 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.18
+* surefire/failsafe 3.0.0-M5 with toolchain support
+* remove forge plugin executions in favor of surefire/failsafe
+* remove redundant skipITs (failsafe already supports this)
+
 ### 5.17
 * Complete repository/snapshot spec
 * -DnexusUrl=X is required for deployment

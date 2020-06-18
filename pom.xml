@@ -36,9 +36,8 @@
     <java.test.version>${java.build.version}</java.test.version>
     <java.test.vendor>${java.build.vendor}</java.test.vendor>
     <maven-forge-plugin.version>1.2.33</maven-forge-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
-    <maven-failsafe-plugin.version>3.0.0-M4</maven-failsafe-plugin.version>
-    <skipITs>${skipTests}</skipITs>
+    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
     <nexusUrl></nexusUrl>
   </properties>
   
@@ -88,18 +87,6 @@
           <version>2.8.2</version>
         </plugin>
         <plugin>
-          <groupId>org.terracotta</groupId>
-          <artifactId>maven-forge-plugin</artifactId>
-          <version>${maven-forge-plugin.version}</version>
-          <configuration>
-            <jdk>
-              <version>${java.test.version}</version>
-              <vendor>${java.test.vendor}</vendor>
-            </jdk>
-            <trimStackTrace>false</trimStackTrace>
-          </configuration>
-        </plugin>
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.1.0</version>
@@ -122,71 +109,62 @@
           <artifactId>maven-source-plugin</artifactId>
           <version>3.0.1</version>
         </plugin>
-        <!-- disable default surefire/failsafe execution since we're using maven-forge-plugin -->
-        <!-- child projects can still declare custom executions if desired -->
+        <!-- parent does not activate forge, bug child projects can -->
+        <plugin>
+          <groupId>org.terracotta</groupId>
+          <artifactId>maven-forge-plugin</artifactId>
+          <version>${maven-forge-plugin.version}</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven-surefire-plugin.version}</version>
-          <executions>
-            <execution>
-              <id>default-test</id>
-              <phase>none</phase>
-            </execution>
-          </executions>
+          <configuration>
+            <jdkToolchain>
+              <version>${java.test.version}</version>
+              <vendor>${java.test.vendor}</vendor>
+            </jdkToolchain>
+            <trimStackTrace>false</trimStackTrace>
+            <excludes>
+              <exclude>**/*IntegrationTest</exclude>
+              <exclude>**/*IT</exclude>
+            </excludes>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${maven-failsafe-plugin.version}</version>
+          <configuration>
+            <jdkToolchain>
+              <version>${java.test.version}</version>
+              <vendor>${java.test.vendor}</vendor>
+            </jdkToolchain>
+            <trimStackTrace>false</trimStackTrace>
+            <reuseForks>false</reuseForks>
+          </configuration>
           <executions>
             <execution>
-              <id>default-test</id>
-              <phase>none</phase>
+              <id>default-integration-test</id>
+              <phase>integration-test</phase>
+              <goals>
+                <goal>integration-test</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>default-verify</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>verify</goal>
+              </goals>
             </execution>
           </executions>
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.terracotta</groupId>
-        <artifactId>maven-forge-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>default-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
-            <configuration>
-              <excludes>
-                <exclude>**/*IntegrationTest</exclude>
-                <exclude>**/*IT</exclude>
-              </excludes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>default-verify</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-            <configuration>
-              <skipITs>${skipITs}</skipITs>
-              <reuseForks>false</reuseForks>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-    </plugins>
-
   </build>
 
   <profiles>
-
     <!--
       default profile contains normal (slow) execution.
       for developer convenience, all inessential plugins can be turned off with -Dfast ...
