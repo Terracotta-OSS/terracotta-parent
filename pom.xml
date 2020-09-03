@@ -55,16 +55,6 @@
     </snapshotRepository>
   </distributionManagement>
 
-  <dependencies>
-    <!-- useful for annotations -->
-    <dependency>
-      <groupId>com.github.spotbugs</groupId>
-      <artifactId>spotbugs-annotations</artifactId>
-      <version>4.0.1</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -375,6 +365,23 @@ limitations under the License.
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+        <id>with-spotbugs</id>
+        <activation>
+          <property>
+            <name>!exclude-spotbugs-dependency</name>
+          </property>
+        </activation>
+        <dependencies>
+            <!-- useful for annotations -->
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs-annotations</artifactId>
+              <version>4.0.1</version>
+              <scope>provided</scope>
+            </dependency>
+        </dependencies>
     </profile>
   </profiles>
 
