@@ -8,6 +8,10 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.19
+* Make spotbugs-annotations optional (-Dexclude-spotbugs-dependency or add to child pom properties)
+* Switched to !property for fast profile.
+
 ### 5.18
 * surefire/failsafe 3.0.0-M5 with toolchain support
 * remove forge plugin executions in favor of surefire/failsafe
