@@ -8,6 +8,9 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 5.20
+* Correcting repository URLs
+
 ### 5.19
 * Make spotbugs-annotations optional (-Dexclude-spotbugs-dependency or add to child pom properties)
 * Switched to !property for fast profile.

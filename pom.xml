@@ -387,7 +387,7 @@ limitations under the License.
   <repositories>
     <repository>
       <id>terracotta-snapshots</id>
-      <url>https://www.terracotta.org/download/reflector/snapshots</url>
+      <url>https://snapshots.terracotta.org/</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -397,7 +397,7 @@ limitations under the License.
     </repository>
     <repository>
       <id>terracotta-releases</id>
-      <url>http://www.terracotta.org/download/reflector/releases</url>
+      <url>https://repo.terracotta.org/maven2</url>
       <releases>
         <enabled>true</enabled>
       </releases>
@@ -409,7 +409,7 @@ limitations under the License.
   <pluginRepositories>
     <pluginRepository>
       <id>terracotta-snapshots</id>
-      <url>https://www.terracotta.org/download/reflector/snapshots</url>
+      <url>https://snapshots.terracotta.org/</url>
       <releases>
         <enabled>false</enabled>
       </releases>
@@ -419,7 +419,7 @@ limitations under the License.
     </pluginRepository>
     <pluginRepository>
       <id>terracotta-releases</id>
-      <url>http://www.terracotta.org/download/reflector/releases</url>
+      <url>https://repo.terracotta.org/maven2</url>
       <releases>
         <enabled>true</enabled>
       </releases>
