@@ -22,7 +22,7 @@
 
   <groupId>org.terracotta</groupId>
   <artifactId>terracotta-parent</artifactId>
-  <version>5.21-SNAPSHOT</version>
+  <version>5.21</version>
   <packaging>pom</packaging>
 
   <name>Terracotta Parent</name>
