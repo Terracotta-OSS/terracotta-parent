@@ -19,15 +19,15 @@
 -->
 
   <modelVersion>4.0.0</modelVersion>
-  
+
   <groupId>org.terracotta</groupId>
   <artifactId>terracotta-parent</artifactId>
   <version>5.21-SNAPSHOT</version>
   <packaging>pom</packaging>
-  
+
   <name>Terracotta Parent</name>
   <description>Parent POM for Terracotta modules</description>
-  
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -40,7 +40,7 @@
     <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
     <nexusUrl></nexusUrl>
   </properties>
-  
+
   <distributionManagement>
     <repository>
       <id>terracotta-os-releases</id>
@@ -384,39 +384,7 @@ limitations under the License.
     </profile>
   </profiles>
 
-  <repositories>
-    <repository>
-      <id>terracotta-snapshots</id>
-      <url>https://snapshots.terracotta.org/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>terracotta-releases</id>
-      <url>https://repo.terracotta.org/maven2</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
   <pluginRepositories>
-    <pluginRepository>
-      <id>terracotta-snapshots</id>
-      <url>https://snapshots.terracotta.org/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
     <pluginRepository>
       <id>terracotta-releases</id>
       <url>https://repo.terracotta.org/maven2</url>
