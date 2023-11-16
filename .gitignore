@@ -9,4 +9,6 @@ target/
 /bin/
 *~
 
+.vscode
+
 nb-configuration.xml

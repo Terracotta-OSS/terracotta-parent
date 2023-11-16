@@ -208,7 +208,7 @@
             <plugin>
               <groupId>com.mycila</groupId>
               <artifactId>license-maven-plugin</artifactId>
-              <version>3.0</version>
+              <version>4.2</version>
               <configuration>
                 <keywords>
                   <keyword>License</keyword>
@@ -250,6 +250,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
                 ]]></inlineHeader>
               </configuration>
+              <dependencies>
+                <dependency>
+                  <groupId>com.mycila</groupId>
+                  <artifactId>license-maven-plugin-git</artifactId>
+                  <!-- make sure you use the same version as license-maven-plugin -->
+                  <version>4.2</version>
+                </dependency>
+              </dependencies>
               <executions>
                 <execution>
                   <id>license</id>

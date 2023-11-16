@@ -8,6 +8,10 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### Latest (dev)
+* Upgrade license-maven-plugin to 4.2
+* license-maven-plugin is using the git plugin to correctly compute year ranges in license headers
+
 ### 5.20
 * Correcting repository URLs
 
