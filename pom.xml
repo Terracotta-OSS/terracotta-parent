@@ -209,7 +209,7 @@
             <plugin>
               <groupId>com.mycila</groupId>
               <artifactId>license-maven-plugin</artifactId>
-              <version>3.0</version>
+              <version>4.5</version>
               <configuration>
                 <keywords>
                   <keyword>License</keyword>
@@ -237,6 +237,7 @@
                 </excludes>
                 <inlineHeader><![CDATA[
 Copyright Terracotta, Inc.
+Copyright Super iPaaS Integration LLC, an IBM Company 2024
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
