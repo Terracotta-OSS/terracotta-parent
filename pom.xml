@@ -1,6 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<!--
+  <!--
 
     Copyright Terracotta, Inc.
     Copyright IBM Corp. 2024, 2025
@@ -23,7 +24,7 @@
 
   <groupId>org.terracotta</groupId>
   <artifactId>terracotta-parent</artifactId>
-  <version>5.25-SNAPSHOT</version>
+  <version>6.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Terracotta Parent</name>
@@ -39,22 +40,13 @@
     <maven-forge-plugin.version>1.2.33</maven-forge-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
-    <nexusUrl></nexusUrl>
-  </properties>
 
-  <distributionManagement>
-    <repository>
-      <id>terracotta-os-releases</id>
-      <name>Terracotta OS Releases Repository</name>
-      <url>${nexusUrl}/content/repositories/terracotta-os-releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>terracotta-os-snapshots</id>
-      <name>Terracotta OS Snapshots Repository</name>
-      <url>${nexusUrl}/content/repositories/terracotta-os-snapshots</url>
-      <uniqueVersion>false</uniqueVersion>
-    </snapshotRepository>
-  </distributionManagement>
+    <artifactory-context-url>https://na.artifactory.swg-devops.com/artifactory</artifactory-context-url>
+    <artifactory-repokey-releases>hyc-webmriab-team-tc01-os-releases-maven-local</artifactory-repokey-releases>
+    <artifactory-repokey-snapshots>hyc-webmriab-team-tc01-os-snapshots-maven-local</artifactory-repokey-snapshots>
+    <artifactory-build-name-prefix>hyc-webmriab-team-tc01/terracotta</artifactory-build-name-prefix>
+
+  </properties>
 
   <build>
     <pluginManagement>
@@ -151,8 +143,82 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.jfrog.buildinfo</groupId>
+          <artifactId>artifactory-maven-plugin</artifactId>
+          <version>3.6.1</version>
+          <executions>
+            <execution>
+              <id>build-info</id>
+              <goals>
+                <goal>publish</goal>
+              </goals>
+              <configuration>
+                <artifactory>
+                  <includeEnvVars>true</includeEnvVars>
+                  <envVarsExcludePatterns>
+                    *password*,*secret*,*key*,*token*,*passphrase*</envVarsExcludePatterns>
+                  <envVarsIncludePatterns>*os*</envVarsIncludePatterns>
+                  <timeoutSec>60</timeoutSec>
+                </artifactory>
+                <buildInfo>
+                  <!-- 
+                      <agentName>..</agentName>
+								      <agentVersion>..</agentVersion> 
+                      -->
+                  <buildName>${artifactory-build-name-prefix}/${artifactory-build-name}</buildName>
+                  <buildNumber>${buildnumber}</buildNumber>
+                  <buildUrl>{{BUILD_URL}}</buildUrl>
+                  <!-- If you'd like to associate the published build-info with a
+								JFrog Project, add the project key here -->
+                  <project>{{ARTIFACTORY_PROJECT}}</project>
+
+                  <!-- 
+                      <buildNumbersNotToDelete></buildNumbersNotToDelete>
+                      <buildRetentionMaxDays></buildRetentionMaxDays>
+                      <buildRetentionCount></buildRetentionCount>
+                       -->
+                  <!-- may need "deleteBuildArtifacts" also, but not in docs -->
+                  <!-- 
+								      <principal>..</principal> 
+                      -->
+                </buildInfo>
+                <deployProperties>
+                  <maven>awesome</maven>
+                </deployProperties>
+                <publisher>
+                  <contextUrl>${artifactory-context-url}</contextUrl>
+                  <username>{{ARTIFACTORY_DEPLOY_USERNAME}}</username>
+                  <password>{{ARTIFACTORY_DEPLOY_PASSWORD}}</password>
+                  <excludePatterns>${artifactory-deploy-exclude-patterns}</excludePatterns>
+                  <includePatterns>${artifactory-deploy-include-patterns}</includePatterns>
+                  <repoKey>${artifactory-repokey-releases}</repoKey>
+                  <snapshotRepoKey>${artifactory-repokey-snapshots}</snapshotRepoKey>
+
+                  <publishArtifacts>true</publishArtifacts>
+                  <publishBuildInfo>true</publishBuildInfo>
+
+                  <filterExcludedArtifactsFromBuild>${artifactory-deploy-filter-excluded}</filterExcludedArtifactsFromBuild>
+                  <!-- If true build information published to Artifactory will include
+								implicit project as well as build-time dependencies -->
+                  <recordAllDependencies>true</recordAllDependencies>
+                  <!-- Minimum file size in KB for which the plugin performs checksum
+								deploy optimization. Default: 10. Set to 0 to disable uploading
+								files with checksum that already exists in Artifactory. -->
+                  <minChecksumDeploySizeKb>10</minChecksumDeploySizeKb>
+                </publisher>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.jfrog.buildinfo</groupId>
+        <artifactId>artifactory-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 
   <profiles>
@@ -190,20 +256,6 @@
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>buildnumber-maven-plugin</artifactId>
               <version>1.3</version>
-            </plugin>
-
-            <plugin>
-              <groupId>org.sonatype.plugins</groupId>
-              <artifactId>nexus-staging-maven-plugin</artifactId>
-              <version>1.6.14</version>
-              <extensions>true</extensions>
-              <configuration>
-                <!-- The Base URL of Nexus instance where we want to stage -->
-                <nexusUrl>${nexusUrl}</nexusUrl>
-                <!-- The server "id" element from settings to use authentication from -->
-                <serverId>terracotta-nexus-staging</serverId>
-                <skipNexusStagingDeployMojo>${maven.deploy.skip}</skipNexusStagingDeployMojo>
-              </configuration>
             </plugin>
 
             <plugin>
@@ -346,10 +398,6 @@ limitations under the License.
             </configuration>
           </plugin>
           <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-          </plugin>
-          <plugin>
             <groupId>com.mycila</groupId>
             <artifactId>license-maven-plugin</artifactId>
           </plugin>
@@ -368,21 +416,21 @@ limitations under the License.
       </build>
     </profile>
     <profile>
-        <id>with-spotbugs</id>
-        <activation>
-          <property>
-            <name>!exclude-spotbugs-dependency</name>
-          </property>
-        </activation>
-        <dependencies>
-            <!-- useful for annotations -->
-            <dependency>
-              <groupId>com.github.spotbugs</groupId>
-              <artifactId>spotbugs-annotations</artifactId>
-              <version>4.0.1</version>
-              <scope>provided</scope>
-            </dependency>
-        </dependencies>
+      <id>with-spotbugs</id>
+      <activation>
+        <property>
+          <name>!exclude-spotbugs-dependency</name>
+        </property>
+      </activation>
+      <dependencies>
+        <!-- useful for annotations -->
+        <dependency>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-annotations</artifactId>
+          <version>4.0.1</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
     </profile>
   </profiles>
 
