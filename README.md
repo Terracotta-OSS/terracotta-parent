@@ -8,6 +8,9 @@ Easier upgrading of all plugins.
 
 ## Changelog
 
+### 6.0
+* Artifactory switch
+
 ### 5.20
 * Correcting repository URLs
 
